@@ -1,0 +1,30 @@
+<div class="spacer"></div>
+<div class="container">
+  <h2 class="center-align header">Portfolio</h2>
+</div>
+<div class="nav-content center-align">
+  <ul class="tabs tabs-transparent">
+    <li *ngFor="let project of projects" (click)="changeSource(project.index)" class="tab"><a [class.active]="curProject.index == project.index">{{project.title}}</a></li>
+  </ul>
+</div>
+<div class="spacer"></div>
+
+<div id="Evergreen" class="col s12">
+  <div class="row">
+    <div class="col s12 m3 lift z-depth-5">
+      <h5 class="center-align">{{curProject.title}}</h5>
+      <hr>
+      <p>
+        {{curProject.desc1}}
+      </p>
+      <p>
+        {{curProject.desc2}}
+      </p>
+      <a target="_blank" class="center-align" [href]="curProject.href">{{curProject.domain}}</a>
+    </div>
+    <div class="col s12 m9" style="height: 100%">
+      <img [src]="curProject.imgSrc" width="100%" />
+    </div>
+  </div>
+</div>
+<div class="spacer"></div>
