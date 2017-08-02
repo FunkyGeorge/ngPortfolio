@@ -8,7 +8,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class FooterComponent implements OnInit {
 
-  stateFlags: Array<Boolean> = [false, false];
+  stateFlags: Array<Boolean> = [false, null];
   userForm: FormGroup;
   tempEmail: string = "";
   phoneNumber: FormControl;
@@ -55,8 +55,8 @@ export class FooterComponent implements OnInit {
   }
 
   private send() {
-    console.log(this.userForm.value);
-    this.stateFlags[0] = false;
+    // send post request
+    this.stateFlags = [false, true];
   }
 
   private toggleModal() {

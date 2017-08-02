@@ -10,8 +10,8 @@
             <li><a class="grey-text text-lighten-3" href="https://www.instagram.com/georgeoffunk/" target="_blank"><img class="icon" src="./assets/img/instagram.png"></a></li>
           </ul>
           <h5 class="white-text">Contact Me</h5>
-          <input class="col s7" [(ngModel)]="tempEmail" type="email" style="background-color: white; border-radius: 4px; color: black;" />
-          <button class="btn col s6" (click)="toggleModal()">Submit</button>
+          <input [attr.disabled]="stateFlags[1]"  class="col s7" [(ngModel)]="tempEmail" type="email" style="background-color: white; border-radius: 4px; color: black;" />
+          <button [attr.disabled]="stateFlags[1]" class="btn col s6" (click)="toggleModal()" >Submit</button>
       </div>
       <div class="col l4 offset-l2 s12">
         <h5 class="white-text">Links</h5>
