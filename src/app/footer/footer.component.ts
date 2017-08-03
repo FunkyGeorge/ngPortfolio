@@ -8,12 +8,13 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/f
 })
 export class FooterComponent implements OnInit {
 
-  // modal, contact inputs, contactErr, formErr, nameErr, msgError, emailError
-  stateFlags: Array<Boolean> = [false, null, false, false, false, false, false];
+  // modal, contact inputs, contactErr, formErr, nameErr, msgErr, emailErr, phoneErr
+  stateFlags: Array<Boolean> = [false, null, false, false, false, false, false, false];
   regexEmail = new RegExp('^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))$');
   userForm: FormGroup;
-  tempEmail: string = "";
+  tempEmail: FormGroup;
   phoneNumber: FormControl;
+  errMessage: String = "Please complete required fields";
 
   constructor(private formBuilder: FormBuilder) {
     this.buildForm();
@@ -26,9 +27,12 @@ export class FooterComponent implements OnInit {
   private buildForm() {
     this.userForm = this.formBuilder.group({
       name: this.formBuilder.control(null),
-      email: this.formBuilder.control(this.tempEmail),
+      email: this.formBuilder.control(null),
       phone: this.formBuilder.control(null),
       msg: this.formBuilder.control(null)
+    });
+    this.tempEmail = this.formBuilder.group({
+      email: this.formBuilder.control(null)
     });
   }
 
@@ -66,29 +70,38 @@ export class FooterComponent implements OnInit {
   }
 
   private send() {
-    this.stateFlags = [true, null, false, false, false, false, false];
+    this.stateFlags = [true, null, false, false, false, false, false, false];
     if (!this.regexEmail.test(this.userForm.value['email'])){
+      this.errMessage = "Please enter a valid email";
       this.stateFlags[6] = true;
       this.stateFlags[3] = true; 
     }
+    if (this.userForm.value['phone'] && this.userForm.value['phone'].length != 14){
+      this.errMessage = "Phone number is invalid";
+      this.stateFlags[7] = true;
+      this.stateFlags[3] = true;
+    }
     if (!this.userForm.value['name']) {
+      this.errMessage = "Please complete required fields";
       this.stateFlags[4] = true;
       this.stateFlags[3] = true; 
     }
     if (!this.userForm.value['msg']) {
+      this.errMessage = "Please complete required fields";
       this.stateFlags[5] = true;
       this.stateFlags[3] = true; 
     }
-    if (this.regexEmail.test(this.userForm.value['email']) && this.userForm.value['name'] && this.userForm.value['msg']) {
+    if (this.regexEmail.test(this.userForm.value['email']) && this.userForm.value['name'] && this.userForm.value['msg'] &&
+        (!this.userForm.value['phone'] || this.userForm.value['phone'].length == 14)) {
       // send post request
-      this.stateFlags = [false, true, false, false, false, false, false];
+      this.stateFlags = [false, true, false, false, false, false, false, false];
     }
   }
 
   private toggleModal() {
-    if (this.regexEmail.test(this.tempEmail)){
+    if (this.regexEmail.test(this.tempEmail.value.email)){
       let formEmail = this.userForm.get('email') as FormControl;
-      formEmail.setValue(this.tempEmail);
+      formEmail.setValue(this.tempEmail.value.email);
       this.stateFlags[0] = true;
       this.stateFlags[2] = false;
     } else {

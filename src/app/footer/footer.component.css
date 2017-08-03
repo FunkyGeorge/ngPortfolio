@@ -2,6 +2,10 @@
     color: darkred;
 }
 
+.hidden {
+    display: none;
+}
+
 .inputError{
     border-color: darkred;
     box-shadow: darkred;
@@ -25,6 +29,6 @@
     text-align: center;
 }
 
-.hidden {
-    display: none;
+.success {
+    color: green;
 }

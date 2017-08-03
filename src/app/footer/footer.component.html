@@ -10,9 +10,12 @@
             <li><a class="grey-text text-lighten-3" href="https://www.instagram.com/georgeoffunk/" target="_blank"><img class="icon" src="./assets/img/instagram.png"></a></li>
           </ul>
           <h5 class="white-text">Contact Me</h5>
-          <input [attr.disabled]="stateFlags[1]"  class="col s7" [(ngModel)]="tempEmail" type="email" style="background-color: white; border-radius: 4px; color: black;" />
-          <button [attr.disabled]="stateFlags[1]" class="btn col s6" (click)="toggleModal()">Submit</button>
+          <form [formGroup]="tempEmail" (ngSubmit)="toggleModal()">
+            <input [attr.disabled]="stateFlags[1]" class="col s7" formControlName="email" type="email" style="background-color: white; border-radius: 4px; color: black;" />
+            <input [attr.disabled]="stateFlags[1]" class="btn col s6" type="submit" value="Submit" />
+          </form>
           <p class="col s7 error" [class.hidden]="!stateFlags[2]">Please input a valid email</p>
+          <p class="col s7 success" [class.hidden]="!stateFlags[1]">Thank you, my bots will reach out to me about your contact request.</p>
       </div>
       <div class="col l4 offset-l2 s12">
         <h5 class="white-text">Links</h5>
@@ -44,5 +47,5 @@
     <textarea [class.inputError]="stateFlags[5]" formControlName="msg" name="msg" id="msg" style="height: 7em"></textarea>
   </div>
   <input class="btn" type="submit" />
-  <p class="error" [class.hidden]="!stateFlags[3]">Please complete required fields</p>
+  <p class="error" [class.hidden]="!stateFlags[3]">{{ errMessage }}</p>
 </form>
