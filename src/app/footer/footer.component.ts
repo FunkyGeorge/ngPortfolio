@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-footer',
@@ -8,7 +8,9 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class FooterComponent implements OnInit {
 
-  stateFlags: Array<Boolean> = [false, null];
+  // modal, contact inputs, contactErr, formErr, nameErr, msgError, emailError
+  stateFlags: Array<Boolean> = [false, null, false, false, false, false, false];
+  regexEmail = new RegExp('^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))$');
   userForm: FormGroup;
   tempEmail: string = "";
   phoneNumber: FormControl;
@@ -19,6 +21,15 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {
     this.phoneNumber = this.userForm.get('phone') as FormControl;
+  }
+
+  private buildForm() {
+    this.userForm = this.formBuilder.group({
+      name: this.formBuilder.control(null),
+      email: this.formBuilder.control(this.tempEmail),
+      phone: this.formBuilder.control(null),
+      msg: this.formBuilder.control(null)
+    });
   }
 
   private formatNumber(key) {
@@ -55,25 +66,33 @@ export class FooterComponent implements OnInit {
   }
 
   private send() {
-    // send post request
-    this.stateFlags = [false, true];
-  }
-
-  private toggleModal() {
-    if (this.tempEmail.length > 3){
-      let formEmail = this.userForm.get('email') as FormControl;
-      formEmail.setValue(this.tempEmail);
-      this.stateFlags[0] = true;
+    this.stateFlags = [true, null, false, false, false, false, false];
+    if (!this.regexEmail.test(this.userForm.value['email'])){
+      this.stateFlags[6] = true;
+      this.stateFlags[3] = true; 
+    }
+    if (!this.userForm.value['name']) {
+      this.stateFlags[4] = true;
+      this.stateFlags[3] = true; 
+    }
+    if (!this.userForm.value['msg']) {
+      this.stateFlags[5] = true;
+      this.stateFlags[3] = true; 
+    }
+    if (this.regexEmail.test(this.userForm.value['email']) && this.userForm.value['name'] && this.userForm.value['msg']) {
+      // send post request
+      this.stateFlags = [false, true, false, false, false, false, false];
     }
   }
 
-  private buildForm() {
-    this.userForm = this.formBuilder.group({
-      name: this.formBuilder.control(null),
-      email: this.formBuilder.control(this.tempEmail),
-      phone: this.formBuilder.control(null),
-      msg: this.formBuilder.control(null)
-    });
+  private toggleModal() {
+    if (this.regexEmail.test(this.tempEmail)){
+      let formEmail = this.userForm.get('email') as FormControl;
+      formEmail.setValue(this.tempEmail);
+      this.stateFlags[0] = true;
+      this.stateFlags[2] = false;
+    } else {
+      this.stateFlags[2] = true;
+    }
   }
-
 }

@@ -11,7 +11,8 @@
           </ul>
           <h5 class="white-text">Contact Me</h5>
           <input [attr.disabled]="stateFlags[1]"  class="col s7" [(ngModel)]="tempEmail" type="email" style="background-color: white; border-radius: 4px; color: black;" />
-          <button [attr.disabled]="stateFlags[1]" class="btn col s6" (click)="toggleModal()" >Submit</button>
+          <button [attr.disabled]="stateFlags[1]" class="btn col s6" (click)="toggleModal()">Submit</button>
+          <p class="col s7 error" [class.hidden]="!stateFlags[2]">Please input a valid email</p>
       </div>
       <div class="col l4 offset-l2 s12">
         <h5 class="white-text">Links</h5>
@@ -28,11 +29,11 @@
 
 <form [formGroup]="userForm" (ngSubmit)="send()" id="Modal" [class.hidden]="!stateFlags[0]">
   <div class="input-field">
-    <input formControlName="email" name="email" type="email" id="email" placeholder="email" />
+    <input [class.invalid]="stateFlags[6]" formControlName="email" name="email" type="email" id="email" placeholder="email" />
   </div> 
   <div class="input-field">
     <label for="name">Name</label>
-    <input formControlName="name" name="name" type="text" id="name" />
+    <input [class.invalid]="stateFlags[4]" formControlName="name" name="name" type="text" id="name" />
   </div>
   <div class="input-field">
     <label for="phone">Phone (optional)</label>
@@ -40,7 +41,8 @@
   </div>
   <div class="input-field">
     <label for="msg">Message</label>
-    <textarea formControlName="msg" name="msg" id="msg" style="height: 7em"></textarea>
+    <textarea [class.inputError]="stateFlags[5]" formControlName="msg" name="msg" id="msg" style="height: 7em"></textarea>
   </div>
   <input class="btn" type="submit" />
+  <p class="error" [class.hidden]="!stateFlags[3]">Please complete required fields</p>
 </form>
