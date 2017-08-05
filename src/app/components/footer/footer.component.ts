@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-footer',
@@ -16,7 +17,7 @@ export class FooterComponent implements OnInit {
   phoneNumber: FormControl;
   errMessage: String = "Please complete required fields";
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private http: HttpService) {
     this.buildForm();
   }
 
@@ -94,7 +95,12 @@ export class FooterComponent implements OnInit {
     if (this.regexEmail.test(this.userForm.value['email']) && this.userForm.value['name'] && this.userForm.value['msg'] &&
         (!this.userForm.value['phone'] || this.userForm.value['phone'].length == 14)) {
       // send post request
-      this.stateFlags = [false, true, false, false, false, false, false, false];
+      // this.http.post('/contacts/create', this.userForm.value)
+      // .then(response => {
+      //   console.log(response);
+      //   this.stateFlags = [false, true, false, false, false, false, false, false];
+      // })
+      // .catch(err => console.log(err));
     }
   }
 
