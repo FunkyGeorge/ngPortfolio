@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
 
@@ -8,6 +8,7 @@ import { HttpService } from '../../services/http.service';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
+  @ViewChildren('input') vc;
 
   // modal, contact inputs, contactErr, formErr, nameErr, msgErr, emailErr, phoneErr
   stateFlags: Array<Boolean> = [false, null, false, false, false, false, false, false];
@@ -29,7 +30,7 @@ export class FooterComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       name: this.formBuilder.control(null),
       email: this.formBuilder.control(null),
-      phone: this.formBuilder.control(null),
+      phone: this.formBuilder.control(""),
       msg: this.formBuilder.control(null)
     });
     this.tempEmail = this.formBuilder.group({
@@ -95,12 +96,12 @@ export class FooterComponent implements OnInit {
     if (this.regexEmail.test(this.userForm.value['email']) && this.userForm.value['name'] && this.userForm.value['msg'] &&
         (!this.userForm.value['phone'] || this.userForm.value['phone'].length == 14)) {
       // send post request
-      // this.http.post('/contacts/create', this.userForm.value)
-      // .then(response => {
-      //   console.log(response);
-      //   this.stateFlags = [false, true, false, false, false, false, false, false];
-      // })
-      // .catch(err => console.log(err));
+      this.http.post('/contacts/create', this.userForm.value)
+      .then(response => {
+        console.log(response);
+        this.stateFlags = [false, true, false, false, false, false, false, false];
+      })
+      .catch(err => console.log(err));
     }
   }
 
@@ -110,6 +111,7 @@ export class FooterComponent implements OnInit {
       formEmail.setValue(this.tempEmail.value.email);
       this.stateFlags[0] = true;
       this.stateFlags[2] = false;
+      this.vc.first.nativeElement.focus();
     } else {
       this.stateFlags[2] = true;
     }
