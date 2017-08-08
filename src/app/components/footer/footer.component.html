@@ -46,6 +46,6 @@
     <label for="msg">Message</label>
     <textarea [class.inputError]="stateFlags[5]" formControlName="msg" name="msg" id="msg" style="height: 7em"></textarea>
   </div>
-  <input class="btn" type="submit" />
+  <input class="btn" type="submit" value="Submit" />
   <p class="error" [class.hidden]="!stateFlags[3]">{{ errMessage }}</p>
 </form>
