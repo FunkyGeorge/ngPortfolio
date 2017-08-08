@@ -1,13 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { NgModule, ViewChild, ViewChildren } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { AboutComponent } from './about/about.component';
-import { ShowcaseComponent } from './showcase/showcase.component';
-import { SpecialtiesComponent } from './specialties/specialties.component';
-import { FooterComponent } from './footer/footer.component';
+import { AboutComponent } from './components/about/about.component';
+import { ShowcaseComponent } from './components/showcase/showcase.component';
+import { SpecialtiesComponent } from './components/specialties/specialties.component';
+import { FooterComponent } from './components/footer/footer.component';
+
+import { HttpService } from './services/http.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdButtonModule, MdMenuModule } from '@angular/material';
@@ -26,9 +28,10 @@ import { MdButtonModule, MdMenuModule } from '@angular/material';
     FormsModule,
     HttpModule,
     MdButtonModule,
-    MdMenuModule
+    MdMenuModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
