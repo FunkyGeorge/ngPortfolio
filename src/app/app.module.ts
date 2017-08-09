@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ViewChild, ViewChildren } from '@angular/core';
+import { enableProdMode , NgModule, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -13,6 +13,8 @@ import { HttpService } from './services/http.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdButtonModule, MdMenuModule } from '@angular/material';
+
+enableProdMode();
 
 @NgModule({
   declarations: [
