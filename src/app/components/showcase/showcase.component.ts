@@ -26,6 +26,20 @@ export class ShowcaseComponent implements OnInit {
     },
     {
       index: 1,
+      imgSrc: "./assets/img/demo.gif",
+      title: "KidzToPros",
+      desc1: `KidzToPros is a utility app for professional instructors that work for the KidzToPros service. The app 
+      would end up helping the company in managing the instructors by providing the company with location updates 
+      depending on the instructor's schedule. The app also includes notifications so that the company could easily 
+      communicate with the instructor`,
+      desc2: `I was given a 3 month deadline to finish an minimum viable product for this mobile application. 
+      I used React-Native to build the app for both iOS and Android. At the end of 3 monthes, the app was live in the 
+      Google Play Store and the App Store`,
+      href: "https://play.google.com/store/apps/details?id=com.ktpreact",
+      domain: "Google Play Store"
+    },
+    {
+      index: 2,
       imgSrc: "./assets/img/RD.PNG",
       title: "Ronin Dev Website",
       desc1: `Ronin Dev is a web development team for hire. Ronin is composed of 4 full stack developers,
@@ -35,7 +49,7 @@ export class ShowcaseComponent implements OnInit {
       domain: "ronindevsquad.com"
     },
     {
-      index: 2,
+      index: 3,
       imgSrc: "./assets/img/GDND.PNG",
       title: "GDND",
       desc1: `GDND is a platform where contractors and suppliers could connect for dirt services. Truckers would be able to
@@ -47,7 +61,7 @@ export class ShowcaseComponent implements OnInit {
       domain: "GDND site"
     },
     {
-      index: 3,
+      index: 4,
       imgSrc: "./assets/img/FT.PNG",
       title: "Foodtrucks",
       desc1: `Foodtrucks is a webpage where, if you are in the San Fransisco area, you can find mobile foodtrucks based on time
@@ -59,7 +73,7 @@ export class ShowcaseComponent implements OnInit {
       domain: "Foodtrucks site"
     },
     {
-      index: 4,
+      index: 5,
       imgSrc: "./assets/img/hack.jpg",
       title: "Misc",
       desc1: `I see that you have clicked this far, thank you for your interest. I am always working on new projects and I will post them
