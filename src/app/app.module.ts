@@ -12,7 +12,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HttpService } from './services/http.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdButtonModule, MdMenuModule } from '@angular/material';
 
 enableProdMode();
 
@@ -29,8 +28,6 @@ enableProdMode();
     BrowserModule,
     FormsModule,
     HttpModule,
-    MdButtonModule,
-    MdMenuModule,
     ReactiveFormsModule
   ],
   providers: [HttpService],
