@@ -9,13 +9,6 @@
             <li><a class="grey-text text-lighten-3" href="https://twitter.com/funky_George" target="_blank"><img class="icon" src="./assets/img/twitter.png"></a></li>
             <li><a class="grey-text text-lighten-3" href="https://www.instagram.com/georgeoffunk/" target="_blank"><img class="icon" src="./assets/img/instagram.png"></a></li>
           </ul>
-          <h5 class="white-text">Contact Me</h5>
-          <form [formGroup]="tempEmail" (ngSubmit)="toggleModal()">
-            <input [attr.disabled]="stateFlags[1]" class="col s7" formControlName="email" type="email" style="background-color: white; border-radius: 4px; color: black;" />
-            <input [attr.disabled]="stateFlags[1]" class="btn col s6" type="submit" value="Submit" />
-          </form>
-          <p class="col s7 error" [class.hidden]="!stateFlags[2]">Please input a valid email</p>
-          <p class="col s7 success" [class.hidden]="!stateFlags[1]">Thank you, my bots will reach out to me about your contact request.</p>
       </div>
       <div class="col l4 offset-l2 s12">
         <h5 class="white-text">Links</h5>
@@ -29,23 +22,3 @@
   </div>
   <div class="footer-copyright"></div>
 </footer>
-
-<form [formGroup]="userForm" (ngSubmit)="send()" id="Modal" [class.hidden]="!stateFlags[0]">
-  <div class="input-field">
-    <input [class.invalid]="stateFlags[6]" formControlName="email" name="email" type="email" id="email" placeholder="email" />
-  </div> 
-  <div class="input-field">
-    <label for="name">Name</label>
-    <input autofocus [class.invalid]="stateFlags[4]" formControlName="name" name="name" type="text" id="name" />
-  </div>
-  <div class="input-field">
-    <label for="phone">Phone (optional)</label>
-    <input (input)="formatNumber($event.data)" formControlName="phone" name="phone" type="text" id="phone" />
-  </div>
-  <div class="input-field">
-    <label for="msg">Message</label>
-    <textarea [class.inputError]="stateFlags[5]" formControlName="msg" name="msg" id="msg" style="height: 7em"></textarea>
-  </div>
-  <input class="btn" type="submit" value="Submit" />
-  <p class="error" [class.hidden]="!stateFlags[3]">{{ errMessage }}</p>
-</form>
